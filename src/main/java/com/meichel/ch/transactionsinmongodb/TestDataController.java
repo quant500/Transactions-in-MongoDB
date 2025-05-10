@@ -1,0 +1,25 @@
+package com.meichel.ch.transactionsinmongodb;
+
+import com.meichel.ch.transactionsinmongodb.service.TestDataService;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/testdata")
+
+public class TestDataController {
+
+    private final TestDataService testDataService;
+
+    public TestDataController(TestDataService testDataService) {
+        this.testDataService = testDataService;
+    }
+
+    @PostMapping
+    public void createTestData() {
+        testDataService.insertTestData();
+    }
+
+}
