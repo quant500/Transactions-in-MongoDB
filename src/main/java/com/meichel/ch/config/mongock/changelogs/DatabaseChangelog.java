@@ -14,12 +14,12 @@ public class DatabaseChangelog {
 
     @Execution
     public void initialSetup(MongoTemplate mongoTemplate) {
-        if (!mongoTemplate.collectionExists("quote")) {
-            mongoTemplate.createCollection("quote");
+        if (!mongoTemplate.collectionExists("items")) {
+            mongoTemplate.createCollection("items");
         }
 
-        MongoCollection<Document> collection = mongoTemplate.getCollection("quote");
-        Document initialDoc = new Document("name", "Initial Document")
+        MongoCollection<Document> collection = mongoTemplate.getCollection("items");
+        Document initialDoc = new Document("name", "Item")
                 .append("value", 100);
         collection.insertOne(initialDoc);
         log.info("Executed ChangeUnit: initial-setup");
@@ -27,8 +27,8 @@ public class DatabaseChangelog {
 
     @RollbackExecution
     public void rollbackInitialSetup(MongoTemplate mongoTemplate) {
-        if (mongoTemplate.collectionExists("quote")) {
-            mongoTemplate.dropCollection("quote");
+        if (mongoTemplate.collectionExists("items")) {
+            mongoTemplate.dropCollection("items");
         }
         log.info("Rolled back ChangeUnit: initial-setup");
     }
