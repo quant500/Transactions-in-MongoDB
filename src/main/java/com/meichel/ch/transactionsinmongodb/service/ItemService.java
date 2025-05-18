@@ -2,9 +2,9 @@ package com.meichel.ch.transactionsinmongodb.service;
 
 import com.meichel.ch.transactionsinmongodb.ItemRepository;
 import com.meichel.ch.transactionsinmongodb.model.TestEntity;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,6 +18,7 @@ public class ItemService {
         this.itemRepository = itemRepository;
     }
 
+    @Transactional
     public void insertItem() {
         itemRepository.deleteAll();
         
